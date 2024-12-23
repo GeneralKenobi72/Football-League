@@ -61,7 +61,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `football-league`.`Club` (
   `ClubName` VARCHAR(45) NOT NULL,
-  `ClubAdress` VARCHAR(45) NOT NULL,
+  `ClubAddress` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ClubName`))
 ENGINE = InnoDB;
 
@@ -80,11 +80,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `football-league`.`Round` (
   `RoundNumber` INT NOT NULL,
-  `Season_Year` INT NOT NULL,
-  PRIMARY KEY (`RoundNumber`, `Season_Year`),
-  INDEX `fk_Round_Season1_idx` (`Season_Year` ASC) VISIBLE,
+  `SeasonYear` INT NOT NULL,
+  PRIMARY KEY (`RoundNumber`, `SeasonYear`),
+  INDEX `fk_Round_Season1_idx` (`SeasonYear` ASC) VISIBLE,
   CONSTRAINT `fk_Round_Season1`
-    FOREIGN KEY (`Season_Year`)
+    FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -97,19 +97,18 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `football-league`.`Match` (
   `MatchID` INT NOT NULL,
   `DateTime` DATETIME NOT NULL,
-  `Round_RoundNumber` INT NOT NULL,
-  `Referee_JMBG` CHAR(13) NOT NULL,
-  `Season_Year` INT NOT NULL,
+  `RoundNumber` INT NOT NULL,
+  `SeasonYear` INT NOT NULL,
   PRIMARY KEY (`MatchID`),
-  INDEX `fk_Match_Round1_idx` (`Round_RoundNumber` ASC) VISIBLE,
-  INDEX `fk_Match_Season1_idx` (`Season_Year` ASC) VISIBLE,
+  INDEX `fk_Match_Round1_idx` (`RoundNumber` ASC) VISIBLE,
+  INDEX `fk_Match_Season1_idx` (`SeasonYear` ASC) VISIBLE,
   CONSTRAINT `fk_Match_Round1`
-    FOREIGN KEY (`Round_RoundNumber`)
+    FOREIGN KEY (`RoundNumber`)
     REFERENCES `football-league`.`Round` (`RoundNumber`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Match_Season1`
-    FOREIGN KEY (`Season_Year`)
+    FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -135,25 +134,25 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Contract` (
   `VALUE` INT NOT NULL,
   `SignedDate` DATE NOT NULL,
   `DateOfExpiration` DATE NOT NULL,
-  `Club_ClubName` VARCHAR(45) NOT NULL,
-  `Season_Year` INT NOT NULL,
-  `Player_JMBG` CHAR(13) NOT NULL,
+  `ClubName` VARCHAR(45) NOT NULL,
+  `SeasonYear` INT NOT NULL,
+  `PlayerJMBG` CHAR(13) NOT NULL,
   PRIMARY KEY (`ContractID`),
-  INDEX `fk_Contract_Club1_idx` (`Club_ClubName` ASC) VISIBLE,
-  INDEX `fk_Contract_Season1_idx` (`Season_Year` ASC) VISIBLE,
-  INDEX `fk_Contract_Player1_idx` (`Player_JMBG` ASC) VISIBLE,
+  INDEX `fk_Contract_Club1_idx` (`ClubName` ASC) VISIBLE,
+  INDEX `fk_Contract_Season1_idx` (`SeasonYear` ASC) VISIBLE,
+  INDEX `fk_Contract_Player1_idx` (`PlayerJMBG` ASC) VISIBLE,
   CONSTRAINT `fk_Contract_Club1`
-    FOREIGN KEY (`Club_ClubName`)
+    FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Contract_Season1`
-    FOREIGN KEY (`Season_Year`)
+    FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Contract_Player1`
-    FOREIGN KEY (`Player_JMBG`)
+    FOREIGN KEY (`PlayerJMBG`)
     REFERENCES `football-league`.`Player` (`JMBG`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -181,10 +180,10 @@ CREATE TABLE IF NOT EXISTS `football-league`.`MatchStats` (
   `NumberOfYellowCards` INT NULL,
   `NumberOfRedCards` INT NULL,
   `NumberOfCorners` INT NULL,
-  `Match_MatchID` INT NOT NULL,
-  PRIMARY KEY (`Match_MatchID`),
+  `MatchID` INT NOT NULL,
+  PRIMARY KEY (`MatchID`),
   CONSTRAINT `fk_MatchStats_Match1`
-    FOREIGN KEY (`Match_MatchID`)
+    FOREIGN KEY (`MatchID`)
     REFERENCES `football-league`.`Match` (`MatchID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -192,27 +191,27 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `football-league`.`PayerStatsInOneMatch`
+-- Table `football-league`.`PlayerStatsInOneMatch`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `football-league`.`PayerStatsInOneMatch` (
+CREATE TABLE IF NOT EXISTS `football-league`.`PlayerStatsInOneMatch` (
   `NumberOfAssists` INT NULL,
   `NumberOfGoals` INT NULL,
   `YellowCard` TINYINT NULL,
   `RedCard` TINYINT NULL,
   `NumberOfMinutes` INT NULL,
-  `Match_MatchID` INT NOT NULL,
-  `Player_JMBG` CHAR(13) NOT NULL,
+  `MatchID` INT NOT NULL,
+  `PlayerJMBG` CHAR(13) NOT NULL,
   `StartingEleven` TINYINT NOT NULL,
-  PRIMARY KEY (`Match_MatchID`, `Player_JMBG`),
-  INDEX `fk_PayerStatsInOneMatch_Match1_idx` (`Match_MatchID` ASC) VISIBLE,
-  INDEX `fk_PayerStatsInOneMatch_Player1_idx` (`Player_JMBG` ASC) VISIBLE,
-  CONSTRAINT `fk_PayerStatsInOneMatch_Match1`
-    FOREIGN KEY (`Match_MatchID`)
+  PRIMARY KEY (`MatchID`, `PlayerJMBG`),
+  INDEX `fk_PlayerStatsInOneMatch_Match1_idx` (`MatchID` ASC) VISIBLE,
+  INDEX `fk_PlayerStatsInOneMatch_Player1_idx` (`PlayerJMBG` ASC) VISIBLE,
+  CONSTRAINT `fk_PlayerStatsInOneMatch_Match1`
+    FOREIGN KEY (`MatchID`)
     REFERENCES `football-league`.`Match` (`MatchID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_PayerStatsInOneMatch_Player1`
-    FOREIGN KEY (`Player_JMBG`)
+  CONSTRAINT `fk_PlayerStatsInOneMatch_Player1`
+    FOREIGN KEY (`PlayerJMBG`)
     REFERENCES `football-league`.`Player` (`JMBG`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -246,23 +245,23 @@ ENGINE = InnoDB;
 -- Table `football-league`.`Season_has_Club`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `football-league`.`Season_has_Club` (
-  `Season_Year` INT NOT NULL,
-  `Club_ClubName` VARCHAR(45) NOT NULL,
+  `SeasonYear` INT NOT NULL,
+  `ClubName` VARCHAR(45) NOT NULL,
   `NumberOfDefeats` INT NULL,
   `NumberOfVictories` INT NULL,
   `NumberOfScoredGoals` INT NULL,
   `NumberOfConcededGoals` INT NULL,
   `Points` INT NULL,
-  PRIMARY KEY (`Season_Year`, `Club_ClubName`),
-  INDEX `fk_Season_has_Club_Club1_idx` (`Club_ClubName` ASC) VISIBLE,
-  INDEX `fk_Season_has_Club_Season1_idx` (`Season_Year` ASC) VISIBLE,
+  PRIMARY KEY (`SeasonYear`, `ClubName`),
+  INDEX `fk_Season_has_Club_Club1_idx` (`ClubName` ASC) VISIBLE,
+  INDEX `fk_Season_has_Club_Season1_idx` (`SeasonYear` ASC) VISIBLE,
   CONSTRAINT `fk_Season_has_Club_Season1`
-    FOREIGN KEY (`Season_Year`)
+    FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Season_has_Club_Club1`
-    FOREIGN KEY (`Club_ClubName`)
+    FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -278,19 +277,22 @@ CREATE TABLE IF NOT EXISTS `football-league`.`PlayerStatsInSeason` (
   `NumberOfYellowCards` INT NULL,
   `NumberOfRedCards` INT NULL,
   `NumberOfMinutes` INT NULL,
-  `Season_Year` INT NOT NULL,
-  `Player_JMBG` CHAR(13) NOT NULL,
+  `NumberOfGames` INT NULL,
+  `NumberOfSaves` INT NULL,
+  `NumberOfConcededGoals` INT NULL,
+  `SeasonYear` INT NOT NULL,
+  `PlayerJMBG` CHAR(13) NOT NULL,
   `NumberOfTimesInStartingEleven` TINYINT NOT NULL,
-  INDEX `fk_PlayerStatsInSeason_Season1_idx` (`Season_Year` ASC) VISIBLE,
-  INDEX `fk_PlayerStatsInSeason_Player1_idx` (`Player_JMBG` ASC) VISIBLE,
-  PRIMARY KEY (`Season_Year`, `Player_JMBG`),
+  INDEX `fk_PlayerStatsInSeason_Season1_idx` (`SeasonYear` ASC) VISIBLE,
+  INDEX `fk_PlayerStatsInSeason_Player1_idx` (`PlayerJMBG` ASC) VISIBLE,
+  PRIMARY KEY (`SeasonYear`, `PlayerJMBG`),
   CONSTRAINT `fk_PlayerStatsInSeason_Season1`
-    FOREIGN KEY (`Season_Year`)
+    FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_PlayerStatsInSeason_Player1`
-    FOREIGN KEY (`Player_JMBG`)
+    FOREIGN KEY (`PlayerJMBG`)
     REFERENCES `football-league`.`Player` (`JMBG`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -301,20 +303,20 @@ ENGINE = InnoDB;
 -- Table `football-league`.`Club_has_Coach`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `football-league`.`Club_has_Coach` (
-  `Club_ClubName` VARCHAR(45) NOT NULL,
-  `Coach_JMBG` CHAR(13) NOT NULL,
+  `ClubName` VARCHAR(45) NOT NULL,
+  `CoachJMBG` CHAR(13) NOT NULL,
   `SignedDate` DATE NOT NULL,
   `DateOfExpiration` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Club_ClubName`, `Coach_JMBG`),
-  INDEX `fk_Club_has_Coach_Coach1_idx` (`Coach_JMBG` ASC) VISIBLE,
-  INDEX `fk_Club_has_Coach_Club1_idx` (`Club_ClubName` ASC) VISIBLE,
+  PRIMARY KEY (`ClubName`, `CoachJMBG`),
+  INDEX `fk_Club_has_Coach_Coach1_idx` (`CoachJMBG` ASC) VISIBLE,
+  INDEX `fk_Club_has_Coach_Club1_idx` (`ClubName` ASC) VISIBLE,
   CONSTRAINT `fk_Club_has_Coach_Club1`
-    FOREIGN KEY (`Club_ClubName`)
+    FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Club_has_Coach_Coach1`
-    FOREIGN KEY (`Coach_JMBG`)
+    FOREIGN KEY (`CoachJMBG`)
     REFERENCES `football-league`.`Coach` (`JMBG`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -325,20 +327,20 @@ ENGINE = InnoDB;
 -- Table `football-league`.`Club_has_President`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `football-league`.`Club_has_President` (
-  `Club_ClubName` VARCHAR(45) NOT NULL,
-  `President_JMBG` CHAR(13) NOT NULL,
+  `ClubName` VARCHAR(45) NOT NULL,
+  `PresidentJMBG` CHAR(13) NOT NULL,
   `SignedDate` DATE NOT NULL,
   `DateOfExpiration` DATE NOT NULL,
-  PRIMARY KEY (`Club_ClubName`, `President_JMBG`),
-  INDEX `fk_Club_has_President_President1_idx` (`President_JMBG` ASC) VISIBLE,
-  INDEX `fk_Club_has_President_Club1_idx` (`Club_ClubName` ASC) VISIBLE,
+  PRIMARY KEY (`ClubName`, `PresidentJMBG`),
+  INDEX `fk_Club_has_President_President1_idx` (`PresidentJMBG` ASC) VISIBLE,
+  INDEX `fk_Club_has_President_Club1_idx` (`ClubName` ASC) VISIBLE,
   CONSTRAINT `fk_Club_has_President_Club1`
-    FOREIGN KEY (`Club_ClubName`)
+    FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Club_has_President_President1`
-    FOREIGN KEY (`President_JMBG`)
+    FOREIGN KEY (`PresidentJMBG`)
     REFERENCES `football-league`.`President` (`JMBG`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -349,19 +351,19 @@ ENGINE = InnoDB;
 -- Table `football-league`.`Match_has_Referee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `football-league`.`Match_has_Referee` (
-  `Match_MatchID` INT NOT NULL,
-  `Referee_JMBG` CHAR(13) NOT NULL,
+  `MatchID` INT NOT NULL,
+  `RefereeJMBG` CHAR(13) NOT NULL,
   `Role` ENUM('Main', 'Assistant') NOT NULL,
-  PRIMARY KEY (`Match_MatchID`, `Referee_JMBG`),
-  INDEX `fk_Match_has_Referee_Referee1_idx` (`Referee_JMBG` ASC) VISIBLE,
-  INDEX `fk_Match_has_Referee_Match1_idx` (`Match_MatchID` ASC) VISIBLE,
+  PRIMARY KEY (`MatchID`, `RefereeJMBG`),
+  INDEX `fk_Match_has_Referee_Referee1_idx` (`RefereeJMBG` ASC) VISIBLE,
+  INDEX `fk_Match_has_Referee_Match1_idx` (`MatchID` ASC) VISIBLE,
   CONSTRAINT `fk_Match_has_Referee_Match1`
-    FOREIGN KEY (`Match_MatchID`)
+    FOREIGN KEY (`MatchID`)
     REFERENCES `football-league`.`Match` (`MatchID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Match_has_Referee_Referee1`
-    FOREIGN KEY (`Referee_JMBG`)
+    FOREIGN KEY (`RefereeJMBG`)
     REFERENCES `football-league`.`Referee` (`JMBG`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -372,18 +374,18 @@ ENGINE = InnoDB;
 -- Table `football-league`.`Stadium_has_Club`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `football-league`.`Stadium_has_Club` (
-  `Stadium_StadiumAdress` VARCHAR(45) NOT NULL,
-  `Club_ClubName` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Stadium_StadiumAdress`, `Club_ClubName`),
-  INDEX `fk_Stadium_has_Club_Club1_idx` (`Club_ClubName` ASC) VISIBLE,
-  INDEX `fk_Stadium_has_Club_Stadium1_idx` (`Stadium_StadiumAdress` ASC) VISIBLE,
+  `StadiumAdress` VARCHAR(45) NOT NULL,
+  `ClubName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`StadiumAdress`, `ClubName`),
+  INDEX `fk_Stadium_has_Club_Club1_idx` (`ClubName` ASC) VISIBLE,
+  INDEX `fk_Stadium_has_Club_Stadium1_idx` (`StadiumAdress` ASC) VISIBLE,
   CONSTRAINT `fk_Stadium_has_Club_Stadium1`
-    FOREIGN KEY (`Stadium_StadiumAdress`)
+    FOREIGN KEY (`StadiumAdress`)
     REFERENCES `football-league`.`Stadium` (`StadiumAdress`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Stadium_has_Club_Club1`
-    FOREIGN KEY (`Club_ClubName`)
+    FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
