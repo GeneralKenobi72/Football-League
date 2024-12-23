@@ -21,7 +21,7 @@ public class StartScreen {
 
     @FXML
     void ExitPress(MouseEvent event) {
-	
+		System.exit(0);
     }
 
     @FXML

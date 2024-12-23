@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="502.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Players">
+   <children>
+      <TableView layoutY="7.0" prefHeight="243.0" prefWidth="502.0">
+        <columns>
+          <TableColumn prefWidth="65.0" text="Name" />
+          <TableColumn prefWidth="85.0" text="Surname" />
+            <TableColumn prefWidth="31.0" text="Age" />
+            <TableColumn prefWidth="51.0" text="Games" />
+            <TableColumn prefWidth="61.0" text="Minutes" />
+            <TableColumn prefWidth="43.0" text="Goals" />
+            <TableColumn prefWidth="53.0" text="Assists" />
+            <TableColumn prefWidth="41.0" text="Saves" />
+            <TableColumn prefWidth="69.0" text="Conceded" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

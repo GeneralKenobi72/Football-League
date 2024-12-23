@@ -47,37 +47,37 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <Button fx:id="StartButton" alignment="CENTER" layoutX="204.0" layoutY="180.0" maxHeight="40.0" maxWidth="230.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#StartPress" prefHeight="40.0" prefWidth="230.0" text="Show leaderboard" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="180.0">
+            <Button fx:id="Leaderboard" alignment="CENTER" layoutX="204.0" layoutY="180.0" maxHeight="40.0" maxWidth="230.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#LeaderboardPress" prefHeight="40.0" prefWidth="230.0" text="Show leaderboard" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="180.0">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="ExitButton" alignment="CENTER" layoutX="242.0" layoutY="232.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#ExitPress" prefHeight="40.0" prefWidth="92.0" text="Teams" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="306.0" AnchorPane.topAnchor="232.0">
+            <Button fx:id="Teams" alignment="CENTER" layoutX="242.0" layoutY="232.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#TeamsPressed" prefHeight="40.0" prefWidth="92.0" text="Teams" AnchorPane.bottomAnchor="128.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="306.0" AnchorPane.topAnchor="232.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="ExitButton1" alignment="CENTER" layoutX="242.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#ExitPress" prefHeight="40.0" prefWidth="92.0" text="Exit">
+            <Button fx:id="Pomocno" alignment="CENTER" layoutX="242.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#PomocniPressed" prefHeight="40.0" prefWidth="92.0" text="Pomocno">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="ExitButton2" alignment="CENTER" layoutX="242.0" layoutY="282.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#ExitPress" prefHeight="40.0" prefWidth="92.0" text="Players">
+            <Button fx:id="Players" alignment="CENTER" layoutX="242.0" layoutY="282.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#PlayersPressed" prefHeight="40.0" prefWidth="92.0" text="Players">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="ExitButton3" alignment="CENTER" layoutX="343.0" layoutY="232.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#ExitPress" prefHeight="40.0" prefWidth="46.0" text="+">
+            <Button fx:id="AddTeam" alignment="CENTER" layoutX="343.0" layoutY="232.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#AddTeamsPressed" prefHeight="40.0" prefWidth="46.0" text="+">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="ExitButton31" alignment="CENTER" layoutX="343.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#ExitPress" prefHeight="40.0" prefWidth="46.0" text="+">
+            <Button fx:id="AddPomocno" alignment="CENTER" layoutX="343.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#AddPomocnoPressed" prefHeight="40.0" prefWidth="46.0" text="+">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="ExitButton32" alignment="CENTER" layoutX="343.0" layoutY="282.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#ExitPress" prefHeight="40.0" prefWidth="46.0" text="+">
+            <Button fx:id="AddPlayer" alignment="CENTER" layoutX="343.0" layoutY="282.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#AddPlayerPressed" prefHeight="40.0" prefWidth="46.0" text="+">
                <font>
                   <Font size="21.0" />
                </font>
