@@ -13,11 +13,7 @@ public class Main extends Application {
 	public static StartScreen GuiInstance;
 
 	public static void main(String[] args) {
-		System.out.println("Initial structure");
 		launch(args);
-
-		ClubDAO.dajKlub();
-		System.exit(0);
 	}
 
 	@Override

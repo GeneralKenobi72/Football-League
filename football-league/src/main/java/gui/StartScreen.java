@@ -27,7 +27,7 @@ public class StartScreen {
     @FXML
     void StartPress(MouseEvent event) {
 		try {
-			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "main_screen.fxml";
+			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "seasons_screen.fxml";
 			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
 			Parent root = loader.load();
 

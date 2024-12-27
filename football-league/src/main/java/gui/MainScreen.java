@@ -9,6 +9,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
 import java.io.*;
+import javafx.scene.control.*;
 
 public class MainScreen {
 
@@ -33,6 +34,20 @@ public class MainScreen {
     @FXML
     private Button Teams;
 
+	@FXML
+    private Button BackButton;
+
+	@FXML
+    private Button Rounds;
+
+    @FXML
+    private Label Season;
+
+	@FXML
+	public void initialize() {
+		Season.setText(SeasonsScreen.choosenSeason);
+	}
+
     @FXML
     void AddPlayerPressed(MouseEvent event) {
 		try {
@@ -51,8 +66,9 @@ public class MainScreen {
 		}
     }
 
-    @FXML
-    void AddPomocnoPressed(MouseEvent event) {
+	@FXML
+    void AddRoundPressed(MouseEvent event) {
+
     }
 
     @FXML
@@ -92,11 +108,6 @@ public class MainScreen {
     }
 
     @FXML
-    void PomocniPressed(MouseEvent event) {
-
-    }
-
-    @FXML
     void LeaderboardPress(MouseEvent event) {
 		try {
 			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "leaderboard.fxml";
@@ -130,6 +141,33 @@ public class MainScreen {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+
+	@FXML
+    void BackPressed(MouseEvent event) {
+		try {
+			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "seasons_screen.fxml";
+			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
+			Parent root = loader.load();
+
+			Stage primaryStage = new Stage();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Football League");
+			primaryStage.show();
+
+			// Main.GuiInstance = loader.getController();
+
+			Stage currentStage = (Stage) BackButton.getScene().getWindow();
+			currentStage.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void RoundsPressed(MouseEvent event) {
+
     }
 
 }

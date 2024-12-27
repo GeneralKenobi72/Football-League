@@ -9,7 +9,7 @@ import java.util.logging.*;
 public class SeasonDAO {
 	public static final String GET_SEASONS = "select * from Season";
 
-	public static ObservableList<Season> dajKlub() {
+	public static ObservableList<Season> dajSezone() {
 		Connection conn = null;
 		Statement s = null;
 		ResultSet rs = null;
@@ -49,5 +49,43 @@ public class SeasonDAO {
 			}
 		}
 		return FXCollections.observableArrayList(result);
+	}
+
+	public static boolean AddSeason(int year) {
+		Connection conn = null;
+		CallableStatement cs = null;
+		boolean success = false;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			conn.setAutoCommit(false);
+
+			cs = conn.prepareCall("{call add_season(?)}");
+			cs.setInt(1, year);
+			cs.execute();
+			conn.commit();
+			success = true;
+		} catch (SQLException e) {
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException rbe) {
+					rbe.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		} finally {
+			if(cs != null) {
+				try {
+					cs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				ConnectionPool.getInstance().checkIn(conn);
+			}
+		}
+		return success;
 	}
 }

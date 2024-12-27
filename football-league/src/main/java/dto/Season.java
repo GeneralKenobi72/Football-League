@@ -7,4 +7,9 @@ public class Season {
 	public Season(int year) {
 		Year = year;
 	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(Year);
+	}
 }
