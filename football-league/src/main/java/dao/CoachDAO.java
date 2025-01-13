@@ -9,7 +9,7 @@ import java.util.logging.*;
 public class CoachDAO {
 	public static final String GET_COACHES = "select * from Coach";
 
-	public static ObservableList<Coach> dajKlub() {
+	public static ObservableList<Coach> dajTrenere() {
 		Connection conn = null;
 		Statement s = null;
 		ResultSet rs = null;

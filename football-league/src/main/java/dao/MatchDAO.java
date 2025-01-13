@@ -5,11 +5,12 @@ import java.sql.*;
 import javafx.collections.*;
 import java.util.*;
 import java.util.logging.*;
+import java.time.*;
 
 public class MatchDAO {
-	public static final String GET_MATCHES = "select * from Match";
+	public static final String GET_MATCHES = "select * from `Match`";
 
-	public static ObservableList<Match> dajKlub() {
+	public static ObservableList<Match> dajMeceve(int i) {
 		Connection conn = null;
 		Statement s = null;
 		ResultSet rs = null;
@@ -22,11 +23,12 @@ public class MatchDAO {
 
 			while(rs.next()) {
 				int MatchID = rs.getInt(1);
-				//DATETIME
+				LocalDateTime ldt = rs.getTimestamp(2).toLocalDateTime();
 				int RoundNumber = rs.getInt(3);
 				int SeasonYear = rs.getInt(4);
 
-				result.add(new Match()); // TODO Other constructor
+				if(RoundNumber == i)
+					result.add(new Match(MatchID, RoundNumber, SeasonYear, ldt)); // TODO Other constructor
 			}
 		} catch (SQLException e) {
 			Logger.getLogger(Match.class.getName()).log(Level.SEVERE, null, e);

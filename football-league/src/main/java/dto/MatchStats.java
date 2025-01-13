@@ -13,4 +13,9 @@ public class MatchStats {
 		NumberOfGoalsGuests = nogg;
 		NumberOfYellowCards = noyc;
 	}
+
+	@Override
+	public String toString() {
+		return MatchID + " " + NumberOfGoalsHome + " " + NumberOfGoalsGuests + " " + NumberOfFans + " " + NumberOfYellowCards + " " + NumberOfRedCards + " " + NumberOfCorners;
+	}
 }

@@ -113,3 +113,20 @@ INSERT INTO Stadium (StadiumAdress, Capacity, Name) VALUES
 ('Obradovac', 100, 'Stadion Obradovca'),
 ('Catrnja', 150, 'Stadion Bisera'),
 ('Cerovljani', 150, 'Stadion Torpeda');
+
+-- Club_has_Match
+INSERT INTO Club_has_Match (Club_ClubName, Match_MatchID, Role) VALUES
+('FK Omladinac', 1, 'Home'),
+('FK Obradovac', 1, 'Away'),
+('FK Sloboda', 2, 'Home'),
+('FK Biseri', 2, 'Away'),
+('FK Torpedo', 3, 'Home'),
+('FK Kozara Turjak', 3, 'Away'),
+('FK Omladinac', 4, 'Home'),
+('FK Sloboda', 4, 'Away'),
+('FK Torpedo', 5, 'Home'),
+('FK Biseri', 5, 'Away'),
+('FK Obradovac', 6, 'Home'),
+('FK Kozara Turjak', 6, 'Away'),
+('FK Torpedo', 7, 'Home'),
+('FK Omladinac', 7, 'Away');

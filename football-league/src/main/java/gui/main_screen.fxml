@@ -42,11 +42,6 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #447018;" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="155.0" layoutY="90.0" style="-fx-font-size: 40;" text="Football League" textAlignment="CENTER" textFill="#d3d3d3" wrapText="false" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="90.0">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
             <Button fx:id="Leaderboard" alignment="CENTER" layoutX="204.0" layoutY="180.0" maxHeight="40.0" maxWidth="230.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#LeaderboardPress" prefHeight="40.0" prefWidth="230.0" text="Show leaderboard" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="180.0">
                <font>
                   <Font size="21.0" />
@@ -57,7 +52,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="Rounds" alignment="CENTER" layoutX="242.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#RoundsPressed" prefHeight="40.0" prefWidth="92.0" text="Rounds">
+            <Button fx:id="Rounds" alignment="CENTER" layoutX="242.0" layoutY="332.0" maxHeight="40.0" maxWidth="148.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#RoundsPressed" prefHeight="40.0" prefWidth="148.0" text="Rounds">
                <font>
                   <Font size="18.0" />
                </font>
@@ -72,11 +67,6 @@
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="AddRound" alignment="CENTER" layoutX="343.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#AddRoundPressed" prefHeight="40.0" prefWidth="46.0" text="+">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Button>
             <Button fx:id="AddPlayer" alignment="CENTER" layoutX="343.0" layoutY="282.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#AddPlayerPressed" prefHeight="40.0" prefWidth="46.0" text="+">
                <font>
                   <Font size="21.0" />
@@ -87,9 +77,9 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="Season" layoutX="45.0" layoutY="180.0" prefHeight="40.0" prefWidth="138.0" text="Season" textFill="#d0d0d0">
+            <Label fx:id="Season" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="124.0" prefHeight="45.0" prefWidth="112.0" text="Season" textAlignment="CENTER" textFill="#d0d0d0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="264.0">
                <font>
-                  <Font size="21.0" />
+                  <Font size="32.0" />
                </font>
             </Label>
       </children>

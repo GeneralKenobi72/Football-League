@@ -66,11 +66,6 @@ public class MainScreen {
 		}
     }
 
-	@FXML
-    void AddRoundPressed(MouseEvent event) {
-
-    }
-
     @FXML
     void AddTeamsPressed(MouseEvent event) {
 		try {
@@ -135,7 +130,7 @@ public class MainScreen {
 			Stage primaryStage = new Stage();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Players");
+			primaryStage.setTitle("Team");
 			primaryStage.show();
 
 		} catch (IOException e) {
@@ -167,8 +162,22 @@ public class MainScreen {
 
     @FXML
     void RoundsPressed(MouseEvent event) {
+		try {
+			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "rounds_screen.fxml";
+			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
+			Parent root = loader.load();
 
+			Stage primaryStage = new Stage();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Round");
+			primaryStage.show();
+
+			Stage currentStage = (Stage) BackButton.getScene().getWindow();
+			currentStage.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
-
 }
 

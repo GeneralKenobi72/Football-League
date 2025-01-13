@@ -1,13 +1,17 @@
 package dto;
 
+import java.time.*;
+
 public class Match {
 	public int MatchID, RoundNumber, SeasonYear;
+	public LocalDateTime dateTime;
 
 	public Match() {}
-	public Match(int mid, int rn, int sy) {
+	public Match(int mid, int rn, int sy, LocalDateTime dt) {
 		MatchID = mid;
 		RoundNumber = rn;
 		SeasonYear = sy;
+		dateTime = dt;
 	}
 
 	public int getMatchId() {
@@ -36,6 +40,6 @@ public class Match {
 
 	@Override
 	public String toString() {
-		return MatchID + " - " + RoundNumber + " - " + SeasonYear;
+		return MatchID + " " + RoundNumber + " " + SeasonYear + " " + dateTime;
 	}
 }

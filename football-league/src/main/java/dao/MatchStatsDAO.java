@@ -9,7 +9,7 @@ import java.util.logging.*;
 public class MatchStatsDAO {
 	public static final String GET_MATCHSTATUSES = "select * from MatchStats";
 
-	public static ObservableList<MatchStats> dajKlub() {
+	public static ObservableList<MatchStats> dajMatchStats(int i) {
 		Connection conn = null;
 		Statement s = null;
 		ResultSet rs = null;
@@ -21,15 +21,16 @@ public class MatchStatsDAO {
 			rs = s.executeQuery(GET_MATCHSTATUSES);
 
 			while(rs.next()) {
-				int MatchId = rs.getInt(1);
-				int NumberOfGoalsHome = rs.getInt(2);
-				int NumberOfGoalsGuests = rs.getInt(3);
-				int NumberOfFans = rs.getInt(4);
-				int NumberOfYellowCards = rs.getInt(5);
-				int NumberOfRedCards = rs.getInt(6);
-				int NumberOfCorners = rs.getInt(7);
+				int MatchID = rs.getInt(7);
+				int NumberOfGoalsHome = rs.getInt(1);
+				int NumberOfGoalsGuests = rs.getInt(2);
+				int NumberOfFans = rs.getInt(3);
+				int NumberOfYellowCards = rs.getInt(4);
+				int NumberOfRedCards = rs.getInt(5);
+				int NumberOfCorners = rs.getInt(6);
 
-				result.add(new MatchStats(MatchId, NumberOfGoalsHome, NumberOfGoalsGuests,NumberOfFans, NumberOfYellowCards, NumberOfRedCards, NumberOfCorners));
+				if(MatchID == i)
+					result.add(new MatchStats(MatchID, NumberOfGoalsHome, NumberOfGoalsGuests,NumberOfFans, NumberOfYellowCards, NumberOfRedCards, NumberOfCorners));
 			}
 		} catch (SQLException e) {
 			Logger.getLogger(MatchStats.class.getName()).log(Level.SEVERE, null, e);

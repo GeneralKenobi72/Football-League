@@ -8,4 +8,9 @@ public class Round {
 		RoundNumber = rn;
 		SeasonYear = sy;
 	}
+
+	@Override
+	public String toString() {
+		return RoundNumber + " " + SeasonYear;
+	}
 }

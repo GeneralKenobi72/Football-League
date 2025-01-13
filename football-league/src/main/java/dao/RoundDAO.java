@@ -9,7 +9,7 @@ import java.util.logging.*;
 public class RoundDAO {
 	public static final String GET_ROUNDS = "select * from Round";
 
-	public static ObservableList<Round> dajKlub() {
+	public static ObservableList<Round> dajRunde() {
 		Connection conn = null;
 		Statement s = null;
 		ResultSet rs = null;
