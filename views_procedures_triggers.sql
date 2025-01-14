@@ -98,3 +98,19 @@ group by c.ClubName
 order by TotalPoints desc;
 end $$
 delimiter ;
+
+-- Triggers
+
+
+-- After add club, add Season_has_Club
+DELIMITER $$
+
+CREATE TRIGGER after_club_insert
+AFTER INSERT ON Club
+FOR EACH ROW
+BEGIN
+    INSERT INTO Season_has_Club (SeasonYear, ClubName, NumberOfDefeats, NumberOfVictories, NumberOfScoredGoals, NumberOfConcededGoals, Points)
+    VALUES (NEW.SeasonYear, NEW.ClubName, NULL, NULL, NULL, NULL);  -- Postavljamo ostale kolone na NULL
+END $$
+
+DELIMITER ;

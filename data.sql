@@ -35,6 +35,14 @@ INSERT INTO PlayerStatsInSeason (SeasonYear, PlayerJMBG, NumberOfGames, NumberOf
 (2024, "6128736821763", 45, 2000, 13, 0, 0, 0, 30, 0, 0),
 (2024, '8721638126388', 29, 2600, 10, 4, 3, 0, 20, 0, 0);
 
+-- Contracts
+INSERT INTO Contract (ContractID, Value, SignedDate, DateOfExpiration, ClubName, SeasonYear, PlayerJMBG) values
+(1, 10000, '2024-07-01 12:00:00', '2025-07-01 12:00:00', 'FK Omladinac', 2024, 2010002101509),
+(2, 15000, '2024-06-01 12:00:00', '2025-06-01 12:00:00', 'FK Omladinac', 2024, 2010002101508),
+(3, 14000, '2024-06-01 12:00:00', '2025-06-01 12:00:00', 'FK Omladinac', 2024, 1923798217391),
+(4, 12000, '2024-05-01 12:00:00', '2025-06-01 12:00:00', 'FK Omladinac', 2024, 6128736821763),
+(5, 17000, '2024-05-01 12:00:00', '2025-05-01 12:00:00', 'FK Omladinac', 2024, 8721638126388);
+
 -- Round
 INSERT INTO `Round` (RoundNumber, SeasonYear) VALUES
 (1, 2024),
@@ -130,3 +138,4 @@ INSERT INTO Club_has_Match (Club_ClubName, Match_MatchID, Role) VALUES
 ('FK Kozara Turjak', 6, 'Away'),
 ('FK Torpedo', 7, 'Home'),
 ('FK Omladinac', 7, 'Away');
+

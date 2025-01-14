@@ -49,66 +49,6 @@ public class MainScreen {
 	}
 
     @FXML
-    void AddPlayerPressed(MouseEvent event) {
-		try {
-			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "add_player.fxml";
-			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
-			Parent root = loader.load();
-
-			Stage primaryStage = new Stage();
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Add Player");
-			primaryStage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    }
-
-    @FXML
-    void AddTeamsPressed(MouseEvent event) {
-		try {
-			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "add_team.fxml";
-			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
-			Parent root = loader.load();
-
-			Stage primaryStage = new Stage();
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Add Team");
-			primaryStage.show();
-
-			Stage currentStage = (Stage) BackButton.getScene().getWindow();
-			currentStage.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    }
-
-    @FXML
-    void PlayersPressed(MouseEvent event) {
-		try {
-			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "players.fxml";
-			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
-			Parent root = loader.load();
-
-			Stage primaryStage = new Stage();
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Players");
-			primaryStage.show();
-
-			Stage currentStage = (Stage) BackButton.getScene().getWindow();
-			currentStage.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    }
-
-    @FXML
     void LeaderboardPress(MouseEvent event) {
 		try {
 			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "leaderboard.fxml";
@@ -141,6 +81,9 @@ public class MainScreen {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Team");
 			primaryStage.show();
+
+			Stage currentStage = (Stage) BackButton.getScene().getWindow();
+			currentStage.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
