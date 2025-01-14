@@ -85,29 +85,54 @@ public class RoundsScreen {
     @FXML
     private Line lineThin;
 
+	int maxround = 0;
+	int currentY;
+
+	@FXML
+    private Button RefreshButton;
+
 	@FXML
     private AnchorPane Pane1;
 
-	int currentY = 0;
 	int spaceRound = 28, roundX = 22, spaceBoldLine = 4, spaceTeam = 14, teamX = 100, dateX = 27, timeX = 29, scoreX = 240, lineStartX = 20, lineEndX = 280;
 
 	@FXML
     void AddMatchPressed(MouseEvent event) {
+		try {
+			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "add_match.fxml";
+			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
+			Parent root = loader.load();
 
+			Stage primaryStage = new Stage();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Add Match");
+			primaryStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
     void AddRoundPressed(MouseEvent event) {
+		Round rnd = new Round(maxround, Integer.parseInt(SeasonsScreen.choosenSeason));
+		RoundDAO.AddRound(maxround, Integer.parseInt(SeasonsScreen.choosenSeason));
 
+		Pane1.getChildren().clear();
+		initialize();
     }
 
 	@FXML
 	public void initialize() {
+		maxround = 0;
+		currentY = 0;
+		Pane1.getChildren().clear();
 		Season.setText(SeasonsScreen.choosenSeason);
 		ObservableList<Round> ol = RoundDAO.dajRunde();
 		if(ol==null)
 			return;
-		for(int i=0;i<ol.size();i++) {
+		for(int i=0;i<ol.size();i++, maxround++) {
 			Text Roundi = new Text();
 			String rnds[] = ol.get(i).toString().split(" ");
 			Roundi.setText("Round " + rnds[0]);
@@ -150,13 +175,13 @@ public class RoundsScreen {
 				time.setText("T " + datetime[1]);
 				String chm1[] = chm.get(0).toString().split("-");	
 				String chm2[] = chm.get(1).toString().split("-");	
-				club1.setText(chm1[0]);
-				club2.setText(chm2[0]);
+				club1.setText(chm2[0]);
+				club2.setText(chm1[0]);
 				String ms1[] = matchstats.get(0).toString().split(" ");
 				System.out.println("Match stats" + j);
 				System.out.println(matchstats.get(0).toString());
-				goals1.setText(ms1[0]);
-				goals2.setText(ms1[1]);
+				goals1.setText(ms1[1]);
+				goals2.setText(ms1[2]);
 				date.setX(dateX);
 				time.setX(timeX);
 				currentY += spaceTeam;
@@ -200,6 +225,7 @@ public class RoundsScreen {
 			line2.setEndY(currentY);
 			Pane1.getChildren().add(line2);
 		}
+		maxround++;
 	}
 
 	@FXML
@@ -222,6 +248,11 @@ public class RoundsScreen {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+
+	@FXML
+    void RefreshPressed(MouseEvent event) {
+		initialize();
     }
 }
 

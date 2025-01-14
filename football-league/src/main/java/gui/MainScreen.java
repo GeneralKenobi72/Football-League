@@ -79,6 +79,9 @@ public class MainScreen {
 			primaryStage.setTitle("Add Team");
 			primaryStage.show();
 
+			Stage currentStage = (Stage) BackButton.getScene().getWindow();
+			currentStage.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -97,6 +100,9 @@ public class MainScreen {
 			primaryStage.setTitle("Players");
 			primaryStage.show();
 
+			Stage currentStage = (Stage) BackButton.getScene().getWindow();
+			currentStage.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -112,8 +118,11 @@ public class MainScreen {
 			Stage primaryStage = new Stage();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Players");
+			primaryStage.setTitle("Leaderboard " + SeasonsScreen.choosenSeason);
 			primaryStage.show();
+
+			Stage currentStage = (Stage) BackButton.getScene().getWindow();
+			currentStage.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();

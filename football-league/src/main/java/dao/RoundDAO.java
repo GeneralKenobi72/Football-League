@@ -51,4 +51,43 @@ public class RoundDAO {
 		}
 		return FXCollections.observableArrayList(result);
 	}
+
+	public static boolean AddRound(int round, int season) {
+		Connection conn = null;
+		CallableStatement cs = null;
+		boolean success = false;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			conn.setAutoCommit(false);
+
+			cs = conn.prepareCall("{call add_round(?, ?)}");
+			cs.setInt(1, round);
+			cs.setInt(2, season);
+			cs.execute();
+			conn.commit();
+			success = true;
+		} catch (SQLException e) {
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException rbe) {
+					rbe.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		} finally {
+			if(cs != null) {
+				try {
+					cs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				ConnectionPool.getInstance().checkIn(conn);
+			}
+		}
+		return success;
+	}
 }

@@ -57,4 +57,47 @@ public class MatchStatsDAO {
 		}
 		return FXCollections.observableArrayList(result);
 	}
+	public static boolean AddMatchStats(int matchid, int nogh, int nogg, int nof, int noyc, int norc, int noc) {
+		Connection conn = null;
+		CallableStatement cs = null;
+		boolean success = false;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			conn.setAutoCommit(false);
+
+			cs = conn.prepareCall("{call add_matchstats(?, ?, ?, ?, ?, ?, ?)}");
+			cs.setInt(1, matchid);
+			cs.setInt(2, nogh);
+			cs.setInt(3, nogg);
+			cs.setInt(4, nof);
+			cs.setInt(5, noyc);
+			cs.setInt(6, norc);
+			cs.setInt(7, noc);
+			cs.execute();
+			conn.commit();
+			success = true;
+		} catch (SQLException e) {
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException rbe) {
+					rbe.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		} finally {
+			if(cs != null) {
+				try {
+					cs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				ConnectionPool.getInstance().checkIn(conn);
+			}
+		}
+		return success;
+	}
 }

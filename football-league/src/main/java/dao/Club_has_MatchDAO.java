@@ -54,4 +54,43 @@ public class Club_has_MatchDAO {
 		}
 		return FXCollections.observableArrayList(result);
 	}
+	public static boolean AddClub_has_Match(String Club, int matchid, String role) {
+		Connection conn = null;
+		CallableStatement cs = null;
+		boolean success = false;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			conn.setAutoCommit(false);
+
+			cs = conn.prepareCall("{call add_c_has_m(?, ?, ?)}");
+			cs.setInt(2, matchid);
+			cs.setString(1, Club);
+			cs.setString(3, role);
+			cs.execute();
+			conn.commit();
+			success = true;
+		} catch (SQLException e) {
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException rbe) {
+					rbe.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		} finally {
+			if(cs != null) {
+				try {
+					cs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				ConnectionPool.getInstance().checkIn(conn);
+			}
+		}
+		return success;
+	}
 }
