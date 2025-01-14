@@ -69,7 +69,25 @@ select c.ClubName, count(m.MatchID) as TotalMatches, sum(
 															when ms.NumberOfGOalsHome = ms.NumberOfGoalsGuests then 1
 															else 0
 														end
-													) as TotalPoints
+													) as TotalPoints, sum(
+														case
+															when chm.Role = 'Home' and ms.NumberOfGoalsHome > ms.NumberOfGoalsGuests then 1
+															when chm.Role = 'Away' and ms.NumberOfGoalsGuests > ms.NumberOfGoalsHome then 1
+															else 0
+														end
+													) as TotalWins, sum(
+														case
+															when chm.Role = 'Home' and ms.NumberOfGoalsHome < ms.NumberOfGoalsGuests then 1
+															when chm.Role = 'Away' and ms.NumberOfGoalsGuests < ms.NumberOfGoalsHome then 1
+															else 0
+														end
+													) as TotalLoses, sum(
+														case
+															when chm.Role = 'Home' and ms.NumberOfGoalsHome = ms.NumberOfGoalsGuests then 1
+															when chm.Role = 'Away' and ms.NumberOfGoalsGuests = ms.NumberOfGoalsHome then 1
+															else 0
+														end
+													)
 from Club c
 join Club_has_Match chm on c.ClubName = chm.Club_ClubName
 join `Match` m on chm.Match_MatchID = m.MatchID

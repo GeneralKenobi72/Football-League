@@ -50,23 +50,31 @@ public class Leaderboard {
 	@FXML
     private Button BackButton2;
 
-	int maxround = 0;
-	int currentY;
-
 	@FXML
     private Button RefreshButton;
 
 	@FXML
     private AnchorPane Pane1;
 
-	int spaceRound = 28, roundX = 22, spaceBoldLine = 4, spaceTeam = 14, teamX = 100, dateX = 27, timeX = 29, scoreX = 240, lineStartX = 20, lineEndX = 280;
+	int placeX = 13, TeamX = 39, PointsX = 205, WLDX = 257, spaceY = 16;
+	int currentY;
+	int spaceBoldLine = 4, lineStartX = 20, lineEndX = 280;
 
 	@FXML
 	public void initialize() {
+		Season.setText(SeasonsScreen.choosenSeason);
 		Connection conn = null;
 		CallableStatement cs = null;
 		boolean success = false;
 		ResultSet rs = null;	
+
+		Line line2 = new Line();
+		line2.setStartX(lineStartX-10);
+		line2.setEndX(lineEndX+15);
+		line2.setStartY(24);
+		line2.setEndY(24);
+
+		Pane1.getChildren().add(line2);
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -75,11 +83,55 @@ public class Leaderboard {
 			cs = conn.prepareCall("{call leaderboard(?)}");
 			cs.setInt(1, Integer.parseInt(SeasonsScreen.choosenSeason));
 			rs = cs.executeQuery();
+
+			currentY = 26;
+			int i=0;
 			while(rs.next()) {
+				i++;
 				String ClubName = rs.getString(1);
-				int numOfMatches = rs.getInt(2);
 				int points = rs.getInt(3);
-				System.out.println(ClubName + " " + points);
+				int numOfWins = rs.getInt(4);
+				int numOfLosses = rs.getInt(5);
+				int numOfDraws = rs.getInt(6);
+				System.out.println(ClubName + " " + points + " " + numOfWins + " " + numOfLosses + " " + numOfDraws);
+				currentY += spaceY;
+
+				Text place = new Text(new Integer(i).toString());
+				Text ClubNameText = new Text(ClubName);
+				Text numOfPointsText = new Text(new Integer(points).toString());
+				Text numOfWinsText = new Text(new Integer(numOfWins).toString());
+				Text numOfLossesText = new Text(new Integer(numOfLosses).toString());
+				Text numOfDrawsText = new Text(new Integer(numOfDraws).toString());
+
+				place.setX(placeX);
+				place.setY(currentY);
+				ClubNameText.setX(TeamX);
+				ClubNameText.setY(currentY);
+				numOfPointsText.setX(PointsX);
+				numOfPointsText.setY(currentY);
+				numOfWinsText.setX(WLDX);
+				numOfWinsText.setY(currentY);
+				numOfLossesText.setX(WLDX+15);
+				numOfLossesText.setY(currentY);
+				numOfDrawsText.setX(WLDX+30);
+				numOfDrawsText.setY(currentY);
+
+				Pane1.getChildren().add(place);
+				Pane1.getChildren().add(ClubNameText);
+				Pane1.getChildren().add(numOfPointsText);
+				Pane1.getChildren().add(numOfWinsText);
+				Pane1.getChildren().add(numOfLossesText);
+				Pane1.getChildren().add(numOfDrawsText);
+
+				Line line = new Line();
+				currentY += 3;
+				line.setStartX(lineStartX-10);
+				line.setEndX(lineEndX+15);
+				line.setStartY(currentY);
+				line.setEndY(currentY);
+				line.setStrokeWidth(0.5);
+
+				Pane1.getChildren().add(line);
 			}
 			conn.commit();
 			success = true;
