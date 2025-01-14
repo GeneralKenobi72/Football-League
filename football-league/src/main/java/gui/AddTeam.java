@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.*;
+import dto.Club;
+import dao.ClubDAO;
 
 public class AddTeam {
 
@@ -32,6 +34,9 @@ public class AddTeam {
 		try {
 			Name = NameField.getText();
 			Address = AddressField.getText();
+
+			Club c = new Club(Name, Address);
+			ClubDAO.AddClub(Name, Address);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

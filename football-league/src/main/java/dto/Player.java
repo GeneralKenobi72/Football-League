@@ -100,6 +100,6 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "JMBG: " + JMBG + ", Name: " + Name + ", Surname: " + Surname;
+		return Name + " " + Surname;
 	}
 }

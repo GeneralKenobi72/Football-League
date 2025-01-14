@@ -52,4 +52,43 @@ public class ClubDAO {
 		}
 		return FXCollections.observableArrayList(result);
 	}
+
+	public static boolean AddClub(String name, String address) {
+		Connection conn = null;
+		CallableStatement cs = null;
+		boolean success = false;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			conn.setAutoCommit(false);
+
+			cs = conn.prepareCall("{call add_club(?, ?)}");
+			cs.setString(1, name);
+			cs.setString(2, address);
+			cs.execute();
+			conn.commit();
+			success = true;
+		} catch (SQLException e) {
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException rbe) {
+					rbe.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		} finally {
+			if(cs != null) {
+				try {
+					cs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				ConnectionPool.getInstance().checkIn(conn);
+			}
+		}
+		return success;
+	}
 }

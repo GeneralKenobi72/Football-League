@@ -48,22 +48,32 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <MenuButton fx:id="menuButton" layoutX="219.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" prefHeight="40.0" prefWidth="142.0" text="Choose Season">
+            <MenuButton fx:id="menuButton" layoutX="179.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#menuButtonClicked" prefHeight="40.0" prefWidth="142.0" text="Choose Season">
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <Button fx:id="AddSeason" alignment="CENTER" layoutX="376.0" layoutY="200.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#AddSeasonClicked" prefHeight="40.0" prefWidth="46.0" text="+">
+            <Button fx:id="AddSeason" alignment="CENTER" layoutX="321.0" layoutY="200.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#AddSeasonClicked" prefHeight="40.0" prefWidth="46.0" text="+">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="Back" alignment="CENTER" layoutX="331.0" layoutY="292.0" maxHeight="40.0" maxWidth="102.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#BackClicked" prefHeight="40.0" prefWidth="90.0" text="Back">
+            <Button fx:id="Back" alignment="CENTER" layoutX="523.0" layoutY="300.0" maxHeight="40.0" maxWidth="102.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#BackClicked" prefHeight="40.0" prefWidth="90.0" text="Back">
                <font>
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="Select" alignment="CENTER" layoutX="219.0" layoutY="292.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#SelectClicked" prefHeight="40.0" prefWidth="90.0" text="Select">
+            <Button fx:id="Select" alignment="CENTER" layoutX="375.0" layoutY="200.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#SelectClicked" prefHeight="40.0" prefWidth="90.0" text="Select">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Button fx:id="SelectTeamView" alignment="CENTER" layoutX="268.0" layoutY="250.0" maxHeight="40.0" maxWidth="107.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#SelectTeamClicked" prefHeight="40.0" prefWidth="107.0" text="Teams">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Button fx:id="SelectPlayerView" alignment="CENTER" layoutX="268.0" layoutY="300.0" maxHeight="40.0" maxWidth="107.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#SelectPlayerClicked" prefHeight="40.0" prefWidth="107.0" text="Players">
                <font>
                   <Font size="21.0" />
                </font>

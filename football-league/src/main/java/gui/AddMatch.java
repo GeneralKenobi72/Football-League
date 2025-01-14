@@ -115,7 +115,7 @@ public class AddMatch {
 		}
 
 		for(int i=0;i<olc.size();i++) {
-			MenuItem mi = new MenuItem(olc.get(i).toString());
+			MenuItem mi = new MenuItem(olc.get(i).toString().split(" ")[0]);
 			HomeTeamField.getItems().add(mi);
 			mi.setOnAction(new EventHandler<ActionEvent>() {
     			@Override public void handle(ActionEvent e) {

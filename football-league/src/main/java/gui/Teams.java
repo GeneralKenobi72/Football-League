@@ -26,6 +26,9 @@ public class Teams {
 	@FXML
     private Text Date;
 
+	@FXML
+    private Button AddTeamButton;
+
     @FXML
     private Text RoundNum;
 
@@ -56,51 +59,61 @@ public class Teams {
 	@FXML
     private AnchorPane Pane1;
 
-	int nameX = 10, CoachX = 100, ValueX = 186, ButtonX = 260, spaceY = 30;
+	public static final String GET_CLUBSTATS = "select * from ClubStats";
+
+	int nameX = 10, CoachX = 100, ValueX = 186, ButtonX = 260, spaceY = 20, WLDX = 250;
 	int currentY;
 	int spaceBoldLine = 4, lineStartX = 20, lineEndX = 280;
 
 	@FXML
 	public void initialize() {
-		Season.setText(SeasonsScreen.choosenSeason);
 		Connection conn = null;
-		CallableStatement cs = null;
-		boolean success = false;
-		ResultSet rs = null;	
+		Statement s = null;
+		ResultSet rs = null;
+		ArrayList<Club> result = new ArrayList<>();
+		currentY = 26;
 
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			conn.setAutoCommit(false);
+			s = conn.createStatement();
+			rs = s.executeQuery(GET_CLUBSTATS);
 
-			cs = conn.prepareCall("{call teams_view(?)}");
-			cs.setInt(1, Integer.parseInt(SeasonsScreen.choosenSeason));
-			rs = cs.executeQuery();
-
-			currentY = 26;
-			int i=0;
 			while(rs.next()) {
-				i++;
 				String ClubName = rs.getString(1);
-				int value = rs.getInt(2);
-				String address = rs.getString(3);
+				int TotalMatches = rs.getInt(3);
+				int ScoredGoals = rs.getInt(2);
+				int Wins = rs.getInt(4);
+				int Losses = rs.getInt(5);
+				int Draws = rs.getInt(6);
+
 				currentY += spaceY;
 
 				Text ClubNameText = new Text(ClubName);
-				Text valueText = new Text(new Integer(value).toString());
-				Text addressText = new Text(address);
-
-				System.out.println(ClubName + value);
+				Text TotalMatchesText = new Text(new Integer(TotalMatches).toString());
+				Text ScoredGoalsText = new Text(new Integer(ScoredGoals).toString());
+				Text WinsText = new Text(new Integer(Wins).toString() + "-");
+				Text LossesText = new Text(new Integer(Losses).toString() + "-");
+				Text DrawsText = new Text(new Integer(Draws).toString());
 
 				ClubNameText.setX(nameX);
 				ClubNameText.setY(currentY);
-				valueText.setX(ValueX);
-				valueText.setY(currentY);
-				addressText.setX(CoachX);
-				addressText.setY(currentY);
+				TotalMatchesText.setX(ValueX+24);
+				TotalMatchesText.setY(currentY);
+				ScoredGoalsText.setX(CoachX+24);
+				ScoredGoalsText.setY(currentY);
+				WinsText.setX(WLDX+4);
+				WinsText.setY(currentY);
+				LossesText.setX(WLDX+19);
+				LossesText.setY(currentY);
+				DrawsText.setX(WLDX+34);
+				DrawsText.setY(currentY);
 
 				Pane1.getChildren().add(ClubNameText);
-				Pane1.getChildren().add(valueText);
-				Pane1.getChildren().add(addressText);
+				Pane1.getChildren().add(ScoredGoalsText);
+				Pane1.getChildren().add(TotalMatchesText);
+				Pane1.getChildren().add(WinsText);
+				Pane1.getChildren().add(LossesText);
+				Pane1.getChildren().add(DrawsText);
 
 				Line line = new Line();
 				currentY += 3;
@@ -112,27 +125,27 @@ public class Teams {
 
 				Pane1.getChildren().add(line);
 			}
-			conn.commit();
-			success = true;
 		} catch (SQLException e) {
-			if(conn != null) {
-				try {
-					conn.rollback();
-				} catch (SQLException rbe) {
-					rbe.printStackTrace();
-				}
-			}
-			e.printStackTrace();
+			Logger.getLogger(Club.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
-			if(cs != null) {
-				try {
-					cs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if(conn != null) {
 				ConnectionPool.getInstance().checkIn(conn);
+			}
+
+			if(s != null) {
+				try {
+					s.close();
+				} catch (SQLException e) {
+					Logger.getLogger(Club.class.getName()).log(Level.SEVERE, null, e);
+				}
+			}
+
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					Logger.getLogger(Club.class.getName()).log(Level.SEVERE, null, e);
+				}
 			}
 		}
 	}
@@ -140,7 +153,7 @@ public class Teams {
 	@FXML
     void BackPressed2(MouseEvent event) {
 		try {
-			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "main_screen.fxml";
+			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "seasons_screen.fxml";
 			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
 			Parent root = loader.load();
 
@@ -160,8 +173,26 @@ public class Teams {
     }
 
 	@FXML
-    void RefreshPressed(MouseEvent event) {
+    void RefreshClicked(MouseEvent event) {
 		initialize();
+    }
+
+	@FXML
+    void AddButtonClicked(MouseEvent event) {
+		try {
+			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "add_team.fxml";
+			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
+			Parent root = loader.load();
+
+			Stage primaryStage = new Stage();
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Add Team");
+			primaryStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }
 

@@ -49,35 +49,44 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="Season" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="28.0" prefHeight="45.0" prefWidth="112.0" text="Season" textAlignment="CENTER" textFill="#d0d0d0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="264.0">
+            <Label fx:id="Season" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="28.0" prefHeight="45.0" prefWidth="112.0" text="Teams" textAlignment="CENTER" textFill="#d0d0d0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="264.0">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
             <ScrollPane layoutX="166.0" layoutY="73.0" prefHeight="301.0" prefWidth="309.0">
               <content>
-                <AnchorPane fx:id="Pane1" maxHeight="1.7976931348623157E308" prefHeight="53.0" prefWidth="309.0">
+                <AnchorPane fx:id="Pane1" maxHeight="1.7976931348623157E308" prefHeight="37.0" prefWidth="310.0">
                      <children>
                         <Label layoutX="10.0" layoutY="6.0" style="-fx-font-weight: bold;" text="Name">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="98.0" layoutY="6.0" style="-fx-font-weight: bold;" text="Address">
+                        <Label layoutX="103.0" layoutY="6.0" style="-fx-font-weight: bold;" text="Matches">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="186.0" layoutY="6.0" style="-fx-font-weight: bold;" text="Value">
+                        <Label layoutX="251.0" layoutY="6.0" style="-fx-font-weight: bold;" text="W-L-D">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Button layoutX="239.0" layoutY="4.0" mnemonicParsing="false" text="Players" />
                         <Line endX="187.0" layoutX="115.0" layoutY="33.0" startX="-108.0" />
+                        <Label layoutX="189.0" layoutY="6.0" style="-fx-font-weight: bold;" text="Goals">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </content>
             </ScrollPane>
+            <Button fx:id="AddTeamButton" alignment="CENTER" layoutX="490.0" layoutY="237.0" maxHeight="40.0" maxWidth="112.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#AddButtonClicked" prefHeight="40.0" prefWidth="112.0" text="Add Team">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>

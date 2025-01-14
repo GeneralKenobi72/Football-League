@@ -27,6 +27,6 @@ public class Club {
 
 	@Override
 	public String toString() {
-		return ClubName;
+		return ClubName + " " + ClubAddress;
 	}
 }

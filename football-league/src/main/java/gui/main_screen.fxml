@@ -47,12 +47,7 @@
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="Teams" alignment="CENTER" layoutX="242.0" layoutY="281.0" maxHeight="40.0" maxWidth="148.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#TeamsPressed" prefHeight="40.0" prefWidth="148.0" text="Teams" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="281.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="Rounds" alignment="CENTER" layoutX="242.0" layoutY="332.0" maxHeight="40.0" maxWidth="148.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#RoundsPressed" prefHeight="40.0" prefWidth="148.0" text="Rounds">
+            <Button fx:id="Rounds" alignment="CENTER" layoutX="246.0" layoutY="275.0" maxHeight="40.0" maxWidth="148.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#RoundsPressed" prefHeight="40.0" prefWidth="148.0" text="Rounds">
                <font>
                   <Font size="18.0" />
                </font>

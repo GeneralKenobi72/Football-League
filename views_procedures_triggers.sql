@@ -16,11 +16,11 @@ begin
 end $$
 delimiter ;
 
------------ Add Team ----------------
+----------- Add Club ----------------
 delimiter $$
-create procedure add_team(in name varchar(45), in address varchar(45))
+create procedure add_club(in name varchar(45), in address varchar(45))
 begin
-	insert into Team(ClubName, ClubAddress) values (name, address);
+	insert into Club(ClubName, ClubAddress) values (name, address);
 end $$
 delimiter ;
 
@@ -101,7 +101,6 @@ delimiter ;
 
 -- Triggers
 
-
 -- After add club, add Season_has_Club
 DELIMITER $$
 
@@ -114,3 +113,48 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+
+-- VIEWS
+CREATE VIEW ClubStats AS
+SELECT 
+    c.ClubName AS Club,
+    COUNT(chm.Match_MatchID) AS TotalMatches,
+    SUM(
+        CASE 
+            WHEN chm.Role = 'Home' THEN ms.NumberOfGoalsHome
+            WHEN chm.Role = 'Away' THEN ms.NumberOfGoalsGuests
+            ELSE 0
+        END
+    ) AS TotalGoals,
+	SUM(
+		CASE
+			WHEN chm.Role = 'Home' and ms.NumberOfGoalsHome > ms.NumberOfGoalsGuests THEN 1
+			WHEN chm.Role = 'Away' and ms.NumberOfGoalsGuests > ms.NumberOfGoalsHome THEN 1
+			else 0
+		END
+	) AS TotalWins,
+	SUM(
+		CASE 
+			WHEN chm.Role = 'Home' and ms.NumberOfGoalsHome < ms.NumberOfGoalsGuests THEN 1
+			WHEN chm.Role = 'Away' and ms.NumberOfGoalsGuests < ms.NumberOfGoalsHome THEN 1
+			else 0
+		END
+	) AS TotalLosses,
+	SUM(
+		CASE 
+			WHEN chm.Role = 'Home' and ms.NumberOfGoalsHome = ms.NumberOfGoalsGuests THEN 1
+			WHEN chm.Role = 'Away' and ms.NumberOfGoalsGuests = ms.NumberOfGoalsHome THEN 1
+			else 0
+		END
+	) AS TotalDraws
+FROM 
+    Club c
+JOIN 
+    Club_has_Match chm ON c.ClubName = chm.Club_ClubName
+JOIN 
+    MatchStats ms ON chm.Match_MatchID = ms.MatchID
+GROUP BY 
+    c.ClubName
+ORDER BY
+	TotalMatches desc;
