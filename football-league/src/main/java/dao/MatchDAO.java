@@ -10,7 +10,7 @@ import java.time.*;
 public class MatchDAO {
 	public static final String GET_MATCHES = "select * from `Match`";
 
-	public static ObservableList<Match> dajMeceve(int i) {
+	public static ObservableList<Match> dajMeceve(int i, int j) {
 		Connection conn = null;
 		Statement s = null;
 		ResultSet rs = null;
@@ -27,7 +27,7 @@ public class MatchDAO {
 				int RoundNumber = rs.getInt(3);
 				int SeasonYear = rs.getInt(4);
 
-				if(RoundNumber == i)
+				if(RoundNumber == i && SeasonYear == j)
 					result.add(new Match(MatchID, RoundNumber, SeasonYear, ldt)); // TODO Other constructor
 			}
 		} catch (SQLException e) {

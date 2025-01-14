@@ -97,7 +97,7 @@ public class AddMatch {
 	
 	@FXML
 	public void initialize() {
-		ObservableList<Round> olr = RoundDAO.dajRunde();
+		ObservableList<Round> olr = RoundDAO.dajRunde(Integer.parseInt(SeasonsScreen.choosenSeason));
 		ObservableList<Club> olc = ClubDAO.dajKlub();
 		HomeTeamField.getItems().removeAll();
 		GuestTeamField.getItems().removeAll();

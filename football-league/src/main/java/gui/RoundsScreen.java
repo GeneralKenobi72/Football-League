@@ -129,7 +129,7 @@ public class RoundsScreen {
 		currentY = 0;
 		Pane1.getChildren().clear();
 		Season.setText(SeasonsScreen.choosenSeason);
-		ObservableList<Round> ol = RoundDAO.dajRunde();
+		ObservableList<Round> ol = RoundDAO.dajRunde(Integer.parseInt(SeasonsScreen.choosenSeason));
 		if(ol==null)
 			return;
 		for(int i=0;i<ol.size();i++, maxround++) {
@@ -153,7 +153,7 @@ public class RoundsScreen {
 			Pane1.getChildren().add(Roundi);
 			Pane1.getChildren().add(line);
 
-			ObservableList<Match> matches = MatchDAO.dajMeceve(i+1);
+			ObservableList<Match> matches = MatchDAO.dajMeceve(i+1, Integer.parseInt(SeasonsScreen.choosenSeason));
 			if(matches == null)
 				continue;
 			System.out.println("Mecevi:");

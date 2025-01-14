@@ -9,7 +9,7 @@ import java.util.logging.*;
 public class RoundDAO {
 	public static final String GET_ROUNDS = "select * from Round";
 
-	public static ObservableList<Round> dajRunde() {
+	public static ObservableList<Round> dajRunde(int i) {
 		Connection conn = null;
 		Statement s = null;
 		ResultSet rs = null;
@@ -24,7 +24,8 @@ public class RoundDAO {
 				int RoundNumber = rs.getInt(1);
 				int SeasonYear = rs.getInt(2);
 
-				result.add(new Round(RoundNumber, SeasonYear));
+				if(SeasonYear == i)
+					result.add(new Round(RoundNumber, SeasonYear));
 			}
 		} catch (SQLException e) {
 			Logger.getLogger(Round.class.getName()).log(Level.SEVERE, null, e);
