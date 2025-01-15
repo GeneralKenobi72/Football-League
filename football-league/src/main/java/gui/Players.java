@@ -27,7 +27,7 @@ public class Players {
     private Text Date;
 
 	@FXML
-    private Button AddTeamButton;
+    private Button AddPlayerButton;
 
     @FXML
     private Text RoundNum;
@@ -59,7 +59,7 @@ public class Players {
 	@FXML
     private AnchorPane Pane1;
 
-	public static final String GET_CLUBSTATS = "select * from ClubStats";
+	public static final String GET_MATCHES = "select * from PlayerStats";
 
 	int nameX = 10, CoachX = 100, ValueX = 186, ButtonX = 260, spaceY = 20, WLDX = 250;
 	int currentY;
@@ -73,47 +73,78 @@ public class Players {
 		ArrayList<Club> result = new ArrayList<>();
 		currentY = 26;
 
+		Pane1.getChildren().clear();
+		Text NameLabel = new Text("Name");
+		Text AgeLabel = new Text("Age");
+		Text GamesLabel = new Text("Games");
+		Text MinutesLabel = new Text("Minutes");
+		Text GoalsLabel = new Text("G");
+		Line lineHeader = new Line();
+
+		NameLabel.setX(10);
+		NameLabel.setY(25);
+		NameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15px;");
+		AgeLabel.setX(122);
+		AgeLabel.setY(25);
+		AgeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15px;");
+		GamesLabel.setX(156);
+		GamesLabel.setY(25);
+		GamesLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15px;");
+		MinutesLabel.setX(211);
+		MinutesLabel.setY(25);
+		MinutesLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15px;");
+		GoalsLabel.setX(283);
+		GoalsLabel.setY(25);
+		GoalsLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15px;");
+		lineHeader.setStartX(115-108);
+		lineHeader.setEndX(115+187);
+		lineHeader.setStartY(33);
+		lineHeader.setEndY(33);
+
+		Pane1.getChildren().add(NameLabel);
+		Pane1.getChildren().add(AgeLabel);
+		Pane1.getChildren().add(GamesLabel);
+		Pane1.getChildren().add(MinutesLabel);
+		Pane1.getChildren().add(lineHeader);
+		Pane1.getChildren().add(GoalsLabel);
+
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			s = conn.createStatement();
-			rs = s.executeQuery(GET_CLUBSTATS);
+			rs = s.executeQuery(GET_MATCHES);
 
 			while(rs.next()) {
-				String ClubName = rs.getString(1);
-				int TotalMatches = rs.getInt(3);
-				int ScoredGoals = rs.getInt(2);
-				int Wins = rs.getInt(4);
-				int Losses = rs.getInt(5);
-				int Draws = rs.getInt(6);
+				String Name = rs.getString(1);
+				String Surname = rs.getString(2);
+				int Age = rs.getInt(3);
+				int Matches = rs.getInt(4);
+				int Minutes = rs.getInt(5);
+				int Goals = rs.getInt(6);
 
 				currentY += spaceY;
 
-				Text ClubNameText = new Text(ClubName);
-				Text TotalMatchesText = new Text(new Integer(TotalMatches).toString());
-				Text ScoredGoalsText = new Text(new Integer(ScoredGoals).toString());
-				Text WinsText = new Text(new Integer(Wins).toString() + "-");
-				Text LossesText = new Text(new Integer(Losses).toString() + "-");
-				Text DrawsText = new Text(new Integer(Draws).toString());
+				Text NameSurnameText = new Text(Name + Surname);
+				Text AgeText = new Text(new Integer(Age).toString());
+				Text MatchesText = new Text(new Integer(Matches).toString());
+				Text MinutesText = new Text(new Integer(Minutes).toString());
+				Text GoalsText = new Text(new Integer(Goals).toString());
 
-				ClubNameText.setX(nameX);
-				ClubNameText.setY(currentY);
-				TotalMatchesText.setX(ValueX+24);
-				TotalMatchesText.setY(currentY);
-				ScoredGoalsText.setX(CoachX+24);
-				ScoredGoalsText.setY(currentY);
-				WinsText.setX(WLDX+4);
-				WinsText.setY(currentY);
-				LossesText.setX(WLDX+19);
-				LossesText.setY(currentY);
-				DrawsText.setX(WLDX+34);
-				DrawsText.setY(currentY);
+				NameSurnameText.setX(10);
+				NameSurnameText.setY(currentY);
+				AgeText.setX(125);
+				AgeText.setY(currentY);
+				MatchesText.setX(173);
+				MatchesText.setY(currentY);
+				MinutesText.setX(225);
+				MinutesText.setY(currentY);
+				GoalsText.setX(283);
+				GoalsText.setY(currentY);
 
-				Pane1.getChildren().add(ClubNameText);
-				Pane1.getChildren().add(ScoredGoalsText);
-				Pane1.getChildren().add(TotalMatchesText);
-				Pane1.getChildren().add(WinsText);
-				Pane1.getChildren().add(LossesText);
-				Pane1.getChildren().add(DrawsText);
+				Pane1.getChildren().add(NameSurnameText);
+				Pane1.getChildren().add(AgeText);
+				Pane1.getChildren().add(MatchesText);
+				Pane1.getChildren().add(MinutesText);
+				Pane1.getChildren().add(GoalsText);
 
 				Line line = new Line();
 				currentY += 3;
@@ -180,19 +211,20 @@ public class Players {
 	@FXML
     void AddButtonClicked(MouseEvent event) {
 		try {
-			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "add_team.fxml";
+			String pathToFXML = "src" + File.separator + "main" + File.separator + "java" + File.separator + "gui" + File.separator + "add_player.fxml";
 			FXMLLoader loader = new FXMLLoader(new File(pathToFXML).toURI().toURL());
 			Parent root = loader.load();
 
 			Stage primaryStage = new Stage();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Add Team");
+			primaryStage.setTitle("Add Player");
 			primaryStage.show();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     }
+
 }
 

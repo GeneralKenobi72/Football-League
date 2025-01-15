@@ -115,7 +115,10 @@ public class AddMatch {
 		}
 
 		for(int i=0;i<olc.size();i++) {
-			MenuItem mi = new MenuItem(olc.get(i).toString().split(" ")[0]);
+			String clubInfo[] = olc.get(i).toString().split("-");
+			if(clubInfo.length < 2)
+				continue;
+			MenuItem mi = new MenuItem(clubInfo[0]);
 			HomeTeamField.getItems().add(mi);
 			mi.setOnAction(new EventHandler<ActionEvent>() {
     			@Override public void handle(ActionEvent e) {
@@ -126,7 +129,10 @@ public class AddMatch {
 		}
 
 		for(int i=0;i<olc.size();i++) {
-			MenuItem mi = new MenuItem(olc.get(i).toString());
+			String clubInfo[] = olc.get(i).toString().split("-");
+			if(clubInfo.length < 2)
+				continue;
+			MenuItem mi = new MenuItem(clubInfo[0]);
 			GuestTeamField.getItems().add(mi);
 			mi.setOnAction(new EventHandler<ActionEvent>() {
     			@Override public void handle(ActionEvent e) {

@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.*;
 import javafx.stage.*;
+import dao.PlayerDAO;
+import dto.Player;
 
 public class AddPlayer {
 
@@ -66,6 +68,9 @@ public class AddPlayer {
 			Conceded = Integer.parseInt(ConcededField.getText());
 			Games = Integer.parseInt(GamesField.getText());
 			Minutes = Integer.parseInt(MinutesField.getText());
+
+			Player p = new Player();
+			PlayerDAO.AddPlayer(Name, Surname, JMBG, Age, Games, Minutes, Goals, Assists, Saves,Conceded);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

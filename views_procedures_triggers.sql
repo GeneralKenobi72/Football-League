@@ -10,9 +10,9 @@ delimiter ;
 
 ----------- Add Player --------------
 delimiter $$
-create procedure add_player(in name varchar(45), in surname varchar(45), in age int(2), in nog int(5), in tm int(6), in nogo int(4), in noas int(4), in nosa int(4), in nocg int(4))
+create procedure add_player(in name varchar(45), in surname varchar(45), in jmbg char(13), in age int(2), in nog int(5), in tm int(6), in nogo int(4), in noas int(4), in nosa int(4), in nocg int(4))
 begin
-	insert into Player(Name, Surname, Age, NumberOfGames, TotalMinutes, NumberOfGoals, NumberOfAssists, NumberOfSaves, NumberOfConcededGoals) values (name, surname, age, nog, tm, nogo, noas, nosa,nocg);
+	insert into Player(Name, Surname, JMBG, Age, NumberOfGames, TotalMinutes, NumberOfGoals, NumberOfAssists, NumberOfSaves, NumberOfConcededGoals) values (name, surname, jmbg, age, nog, tm, nogo, noas, nosa,nocg);
 end $$
 delimiter ;
 
@@ -114,8 +114,41 @@ END $$
 
 DELIMITER ;
 
+-- After delete Round, delete Match and MatchStats
+delimiter $$
+
+create trigger after_round_delete
+after delete on `Round`
+for each row
+begin
+	DELETE FROM MatchStatus
+    WHERE MatchID IN (
+        SELECT MatchID
+        FROM `Match`
+        WHERE RoundNumber = OLD.RoundNumber AND SeasonYear = OLD.SeasonYear
+    );
+	delete from `Match`
+	where RoundNumber = OLD.RoundNumber and SeasonYear = OLD.SeasonYear;
+end $$
+
+delimiter ;
+
+-- After delete Season, delete all rounds from Season
+delimiter $$
+
+create trigger after_season_delete
+after delete on `Season`
+for each row
+begin
+	delete from Round
+	where SeasonYear = OLD.Year;
+end $$
+
 
 -- VIEWS
+
+-- Clubs View
+
 CREATE VIEW ClubStats AS
 SELECT 
     c.ClubName AS Club,
@@ -158,3 +191,8 @@ GROUP BY
     c.ClubName
 ORDER BY
 	TotalMatches desc;
+
+-- Players View
+
+CREATE VIEW PlayerStats AS
+SELECT Name, Surname, Age, NumberOfGames, TotalMinutes, NumberOfGoals from Player

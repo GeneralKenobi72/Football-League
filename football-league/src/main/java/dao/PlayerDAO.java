@@ -60,7 +60,7 @@ public class PlayerDAO {
 		return FXCollections.observableArrayList(result);
 	}
 
-	public static boolean AddPlayer(int name, int address) { //TODO Ovo je prekopirano od Kluba
+	public static boolean AddPlayer(String name, String surname, String JMBG, int age, int noga, int tm, int nogo, int noa, int nos, int nocg) {
 		Connection conn = null;
 		CallableStatement cs = null;
 		boolean success = false;
@@ -69,9 +69,17 @@ public class PlayerDAO {
 			conn = ConnectionPool.getInstance().checkOut();
 			conn.setAutoCommit(false);
 
-			cs = conn.prepareCall("{call add_club(?, ?)}");
-			cs.setInt(1, name);
-			cs.setInt(2, address);
+			cs = conn.prepareCall("{call add_player(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			cs.setString(1, name);
+			cs.setString(2, surname);
+			cs.setString(3, JMBG);
+			cs.setInt(4, age);
+			cs.setInt(5, noga);
+			cs.setInt(6, tm);
+			cs.setInt(7, nogo);
+			cs.setInt(8, noa);
+			cs.setInt(9, nos);
+			cs.setInt(10, nocg);
 			cs.execute();
 			conn.commit();
 			success = true;
@@ -98,5 +106,4 @@ public class PlayerDAO {
 		}
 		return success;
 	}
-}
 }
