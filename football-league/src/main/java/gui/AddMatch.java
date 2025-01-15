@@ -159,7 +159,7 @@ public class AddMatch {
 		LocalDateTime datetime = null;
 
 		ObservableList<Match> matches = MatchDAO.dajMeceve();
-		matchid = matches.size() + 1;
+		matchid = Integer.parseInt(matches.get(matches.size()-2).toString().split(" ")[0]) + 2;
 
 		try {
 			if(GoalsHomeField.getText() != "")

@@ -64,6 +64,7 @@ public class Club_has_MatchDAO {
 			conn.setAutoCommit(false);
 
 			cs = conn.prepareCall("{call add_c_has_m(?, ?, ?)}");
+			System.out.println(matchid + " " + Club + " " + role);
 			cs.setInt(2, matchid);
 			cs.setString(1, Club);
 			cs.setString(3, role);

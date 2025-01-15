@@ -73,7 +73,7 @@
                   <Font size="21.0" />
                </font>
             </Button>
-            <Button fx:id="SelectPlayerView" alignment="CENTER" layoutX="268.0" layoutY="300.0" maxHeight="40.0" maxWidth="107.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#SelectPlayerClicked" prefHeight="40.0" prefWidth="107.0" style="-fx-border-color: black;" text="Players">
+            <Button fx:id="SelectPlayerView" alignment="CENTER" layoutX="268.0" layoutY="300.0" maxHeight="48.0" maxWidth="107.0" minHeight="40.0" minWidth="46.0" mnemonicParsing="false" onMouseClicked="#SelectPlayerClicked" prefHeight="46.0" prefWidth="107.0" style="-fx-border-color: black;" text="Players">
                <font>
                   <Font size="21.0" />
                </font>

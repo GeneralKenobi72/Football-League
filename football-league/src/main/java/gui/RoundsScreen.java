@@ -162,7 +162,7 @@ public class RoundsScreen {
 				String matchStrings[] = matches.get(j).toString().split(" ");
 				ObservableList<MatchStats> matchstats = MatchStatsDAO.dajMatchStats(Integer.parseInt(matchStrings[0]));
 				ObservableList<Club_has_Match> chm = Club_has_MatchDAO.dajClubhasMatches(Integer.parseInt(matchStrings[0]));
-				if(chm == null || chm.toString().equals("[]"))
+				if(chm == null || chm.toString().equals("[]") || chm.size() < 2)
 					continue;
 				Text date = new Text();
 				Text time = new Text();
