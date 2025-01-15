@@ -101,49 +101,49 @@ delimiter ;
 
 -- Triggers
 
--- After add club, add Season_has_Club
+-- Before deleting Match, delete Club_has_Match and MatchStats
 DELIMITER $$
 
-CREATE TRIGGER after_club_insert
-AFTER INSERT ON Club
+CREATE TRIGGER before_match_delete
+BEFORE DELETE ON `Match`
 FOR EACH ROW
 BEGIN
-    INSERT INTO Season_has_Club (SeasonYear, ClubName, NumberOfDefeats, NumberOfVictories, NumberOfScoredGoals, NumberOfConcededGoals, Points)
-    VALUES (NEW.SeasonYear, NEW.ClubName, NULL, NULL, NULL, NULL);  -- Postavljamo ostale kolone na NULL
-END $$
+    -- Prvo brišemo sve zapise iz Club_has_Match koji su povezani s MatchID
+    DELETE FROM Club_has_Match WHERE Match_MatchID = OLD.MatchID;
+
+    -- Zatim brišemo sve zapise iz MatchStats koji su povezani s MatchID
+    DELETE FROM MatchStats WHERE MatchID = OLD.MatchID;
+END$$
+
+Delimiter ;
+
+-- Before deleting Round, delete Matches from Round
+
+DELIMITER $$
+
+CREATE TRIGGER before_round_delete
+BEFORE DELETE ON `Round`
+FOR EACH ROW
+BEGIN
+    -- Brišemo sve mečeve koji su povezani s obrisanom rundom
+    DELETE FROM `Match` WHERE RoundNumber = OLD.RoundNumber AND SeasonYear = OLD.SeasonYear;
+END$$
+
+Delimiter ;
+
+-- Before deleting Season, delete rounds
+
+DELIMITER $$
+
+CREATE TRIGGER before_season_delete
+BEFORE DELETE ON `Season`
+FOR EACH ROW
+BEGIN
+    -- Brišemo sve runde koje pripadaju obrisanoj sezoni
+    DELETE FROM Round WHERE SeasonYear = OLD.Year;
+END$$
 
 DELIMITER ;
-
--- After delete Round, delete Match and MatchStats
-delimiter $$
-
-create trigger after_round_delete
-after delete on `Round`
-for each row
-begin
-	DELETE FROM MatchStatus
-    WHERE MatchID IN (
-        SELECT MatchID
-        FROM `Match`
-        WHERE RoundNumber = OLD.RoundNumber AND SeasonYear = OLD.SeasonYear
-    );
-	delete from `Match`
-	where RoundNumber = OLD.RoundNumber and SeasonYear = OLD.SeasonYear;
-end $$
-
-delimiter ;
-
--- After delete Season, delete all rounds from Season
-delimiter $$
-
-create trigger after_season_delete
-after delete on `Season`
-for each row
-begin
-	delete from Round
-	where SeasonYear = OLD.Year;
-end $$
-
 
 -- VIEWS
 
