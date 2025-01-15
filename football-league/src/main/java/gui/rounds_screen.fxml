@@ -43,12 +43,12 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-image: url('Background.png');" VBox.vgrow="ALWAYS">
       <children>
-            <Button fx:id="BackButton2" alignment="CENTER" layoutX="500.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#BackPressed2" prefHeight="40.0" prefWidth="92.0" text="Back">
+            <Button fx:id="BackButton2" alignment="CENTER" layoutX="500.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#BackPressed2" prefHeight="40.0" prefWidth="92.0" style="-fx-border-color: black;" text="Back">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="Season" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="28.0" prefHeight="45.0" prefWidth="112.0" style="-fx-background-color: #447018;" text="Season" textAlignment="CENTER" textFill="#d0d0d0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="264.0">
+            <Label fx:id="Season" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="19.0" prefHeight="45.0" prefWidth="112.0" style="-fx-background-color: #447018; -fx-border-color: black; -fx-border-width: 3;" text="Season" textAlignment="CENTER" textFill="#d0d0d0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="264.0">
                <font>
                   <Font size="32.0" />
                </font>
@@ -59,17 +59,17 @@
               </content>
             </ScrollPane>
             <VBox layoutX="116.0" layoutY="-27.0" prefHeight="200.0" prefWidth="100.0" />
-            <Button fx:id="AddMatchButton" alignment="CENTER" layoutX="483.0" layoutY="230.0" maxHeight="40.0" maxWidth="126.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#AddMatchPressed" prefHeight="40.0" prefWidth="126.0" text="Add Match">
+            <Button fx:id="AddMatchButton" alignment="CENTER" layoutX="483.0" layoutY="230.0" maxHeight="40.0" maxWidth="126.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#AddMatchPressed" prefHeight="40.0" prefWidth="126.0" style="-fx-border-color: black;" text="Add Match">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="AddRoundButton" alignment="CENTER" layoutX="483.0" layoutY="180.0" maxHeight="40.0" maxWidth="126.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#AddRoundPressed" prefHeight="40.0" prefWidth="126.0" text="Add Round">
+            <Button fx:id="AddRoundButton" alignment="CENTER" layoutX="483.0" layoutY="180.0" maxHeight="40.0" maxWidth="126.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#AddRoundPressed" prefHeight="40.0" prefWidth="126.0" style="-fx-border-color: black;" text="Add Round">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="RefreshButton" alignment="CENTER" layoutX="483.0" layoutY="280.0" maxHeight="40.0" maxWidth="126.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#RefreshPressed" prefHeight="40.0" prefWidth="126.0" text="Refresh">
+            <Button fx:id="RefreshButton" alignment="CENTER" layoutX="483.0" layoutY="280.0" maxHeight="40.0" maxWidth="126.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#RefreshPressed" prefHeight="40.0" prefWidth="126.0" style="-fx-border-color: black;" text="Refresh">
                <font>
                   <Font size="18.0" />
                </font>
