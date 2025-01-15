@@ -41,14 +41,14 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Leaderboard">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #447018;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-image: url('Background.png');" VBox.vgrow="ALWAYS">
       <children>
             <Button fx:id="BackButton2" alignment="CENTER" layoutX="500.0" layoutY="332.0" maxHeight="40.0" maxWidth="92.0" minHeight="40.0" minWidth="92.0" mnemonicParsing="false" onMouseClicked="#BackPressed2" prefHeight="40.0" prefWidth="92.0" text="Back">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="Season" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="28.0" prefHeight="45.0" prefWidth="112.0" text="Season" textAlignment="CENTER" textFill="#d0d0d0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="264.0">
+            <Label fx:id="Season" alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="28.0" prefHeight="45.0" prefWidth="112.0" style="-fx-background-color: #447018;" text="Season" textAlignment="CENTER" textFill="#d0d0d0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="264.0">
                <font>
                   <Font size="32.0" />
                </font>

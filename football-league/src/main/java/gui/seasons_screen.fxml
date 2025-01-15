@@ -41,9 +41,9 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SeasonsScreen">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #447018;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-image: url('Background.png');" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="155.0" layoutY="90.0" style="-fx-font-size: 40;" text="Football League" textAlignment="CENTER" textFill="#d3d3d3" wrapText="false" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="90.0">
+        <Label alignment="CENTER" layoutX="155.0" layoutY="90.0" style="-fx-font-size: 40; -fx-background-color: #447018;" text="Football League" textAlignment="CENTER" textFill="#d3d3d3" wrapText="false" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="90.0">
           <font>
             <Font size="18.0" />
           </font>
