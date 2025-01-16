@@ -184,14 +184,11 @@ public class AddMatch {
 			datetime = LocalDateTime.parse(fulldatetime, formatter);
 			System.out.println(matchid + " " + HomeTeam + " " + GuestTeam);
 			if(matchid != 0 && round != 0 && HomeTeam != "Home Team" && HomeTeam != "" && GuestTeam != "Guest Team" && GuestTeam != "" && datetime != null) {
-				Match m = new Match(matchid, round, season, datetime); 
-				MatchStats ms = new MatchStats(matchid, goalshome, goalsguests, fans, corners, yellowcards, redcards);
-				MatchDAO.AddMatch(matchid, datetime, round, season);
-				MatchStatsDAO.AddMatchStats(matchid, goalshome, goalsguests, fans, yellowcards, redcards, corners);
-				Club_has_Match chmh = new Club_has_Match(HomeTeam, "Home", matchid);
-				Club_has_Match chma = new Club_has_Match(GuestTeam, "Away", matchid);
-				Club_has_MatchDAO.AddClub_has_Match(HomeTeam, matchid, "Home");
-				Club_has_MatchDAO.AddClub_has_Match(GuestTeam, matchid, "Away");
+				MatchDAO.AddMatch(matchid, datetime, round, season, goalshome, goalsguests, fans, yellowcards, redcards, corners, HomeTeam, GuestTeam);
+				// MatchDAO.AddMatch(matchid, datetime, round, season);
+				// Club_has_MatchDAO.AddClub_has_Match(HomeTeam, matchid, "Home");
+				// Club_has_MatchDAO.AddClub_has_Match(GuestTeam, matchid, "Away");
+				// MatchStatsDAO.AddMatchStats(matchid, goalshome, goalsguests, fans, yellowcards, redcards, corners);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

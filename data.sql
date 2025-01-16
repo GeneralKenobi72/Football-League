@@ -19,30 +19,6 @@ INSERT INTO Player (JMBG, Name, Surname, Age, NumberOfGames, TotalMinutes, Numbe
 ("6128736821763", "Nikola", "Nikolic", 34, 45, 2000, 13, 0, 0, 0),
 ("8721638126388", "Marko", "Petrovic", 25, 22, 990, 0, 0, 30, 14);
 
--- PlayerStatsInOneMatch
-INSERT INTO PlayerStatsInOneMatch (MatchID, PlayerJMBG, NumberOfAssists, NumberOfGoals, YellowCard, RedCard, NumberOfMinutes, StartingEleven) VALUES
-(1, '2010002101508', 2, 1, 1, 0, 90, 1),
-(1, '2010002101509', 1, 0, 0, 0, 85, 1),
-(1, '1923798217391', 0, 0, 1, 0, 70, 1),
-(2, '6128736821763', 0, 2, 0, 0, 88, 1),
-(2, '8721638126388', 1, 1, 0, 1, 60, 1);
-
--- PlayerStatsInSeason
-INSERT INTO PlayerStatsInSeason (SeasonYear, PlayerJMBG, NumberOfGames, NumberOfMinutes, NumberOfGoals, NumberOfAssists, NumberOfYellowCards, NumberOfRedCards, NumberOfTimesInStartingEleven, NumberOfConcededGoals, NumberOfSaves) VALUES
-(2024, "2010002101508", 11, 760, 2, 10, 1, 0, 11, 0, 0),
-(2024, "2010002101509", 14, 1000, 2, 9, 0, 0, 14, 0, 0),
-(2024, "1923798217391", 8, 118, 0, 0 ,0, 0, 4, 0, 0),
-(2024, "6128736821763", 45, 2000, 13, 0, 0, 0, 30, 0, 0),
-(2024, '8721638126388', 29, 2600, 10, 4, 3, 0, 20, 0, 0);
-
--- Contracts
-INSERT INTO Contract (ContractID, Value, SignedDate, DateOfExpiration, ClubName, SeasonYear, PlayerJMBG) values
-(1, 10000, '2024-07-01 12:00:00', '2025-07-01 12:00:00', 'FK Omladinac', 2024, 2010002101509),
-(2, 15000, '2024-06-01 12:00:00', '2025-06-01 12:00:00', 'FK Omladinac', 2024, 2010002101508),
-(3, 14000, '2024-06-01 12:00:00', '2025-06-01 12:00:00', 'FK Omladinac', 2024, 1923798217391),
-(4, 12000, '2024-05-01 12:00:00', '2025-06-01 12:00:00', 'FK Omladinac', 2024, 6128736821763),
-(5, 17000, '2024-05-01 12:00:00', '2025-05-01 12:00:00', 'FK Omladinac', 2024, 8721638126388);
-
 -- Round
 INSERT INTO `Round` (RoundNumber, SeasonYear) VALUES
 (1, 2024),

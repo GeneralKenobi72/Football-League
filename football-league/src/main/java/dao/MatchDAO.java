@@ -141,4 +141,53 @@ public class MatchDAO {
 		}
 		return success;
 	}
+
+	public static boolean AddMatch(int matchid, LocalDateTime ldt, int round, int season, int nogh, int nogg, int nof, int noyc, int norc, int noc, String home, String guest) {
+		Connection conn = null;
+		CallableStatement cs = null;
+		boolean success = false;
+
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			conn.setAutoCommit(false);
+
+			cs = conn.prepareCall("{call add_full_match(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			cs.setInt(1, matchid);
+			cs.setTimestamp(2, Timestamp.valueOf(ldt));
+			cs.setInt(3, round);
+			cs.setInt(4, season);
+			cs.setInt(5, nogh);
+			cs.setInt(6, nogg);
+			cs.setInt(7, nof);
+			cs.setInt(8, noyc);
+			cs.setInt(9, norc);
+			cs.setInt(10, noc);
+			cs.setString(11, home);
+			cs.setString(12, guest);
+			cs.execute();
+			conn.commit();
+			success = true;
+		} catch (SQLException e) {
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException rbe) {
+					rbe.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		} finally {
+			if(cs != null) {
+				try {
+					cs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				ConnectionPool.getInstance().checkIn(conn);
+			}
+		}
+		return success;
+	}	
 }

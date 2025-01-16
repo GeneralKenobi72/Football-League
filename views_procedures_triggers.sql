@@ -56,7 +56,51 @@ begin
 end $$
 delimiter ;
 
+DELIMITER $$
 
+CREATE PROCEDURE add_full_match(
+    IN p_matchid INT(5),
+    IN p_date_time DATETIME,
+    IN p_round_number INT(5),
+    IN p_season INT(5),
+    IN p_nogh INT(5),
+    IN p_nogg INT(5),
+    IN p_nof INT(6),
+    IN p_noyc INT(2),
+    IN p_norc INT(1),
+    IN p_noc INT(3),
+    IN p_home_club VARCHAR(45),
+    IN p_away_club VARCHAR(45)
+)
+BEGIN
+    -- Greška handler
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK; -- Poništi sve promene ako dođe do greške
+    END;
+
+    START TRANSACTION;
+
+    -- Unesi u Match
+    INSERT INTO `Match`(MatchID, DateTime, RoundNumber, SeasonYear)
+    VALUES (p_matchid, p_date_time, p_round_number, p_season);
+
+    -- Unesi u MatchStats
+    INSERT INTO MatchStats(MatchID, NumberOfGoalsHome, NumberOfGoalsGuests, NumberOfFans, NumberOfYellowCards, NumberOfRedCards, NumberOfCorners)
+    VALUES (p_matchid, p_nogh, p_nogg, p_nof, p_noyc, p_norc, p_noc);
+
+    -- Unesi u Club_has_Match za Home tim
+    INSERT INTO Club_has_Match(Club_ClubName, Match_MatchID, Role)
+    VALUES (p_home_club, p_matchid, 'Home');
+
+    -- Unesi u Club_has_Match za Away tim
+    INSERT INTO Club_has_Match(Club_ClubName, Match_MatchID, Role)
+    VALUES (p_away_club, p_matchid, 'Away');
+
+    COMMIT; -- Potvrdi sve promene
+END$$
+
+DELIMITER ;
 
 -------------- leaderboard --------------
 delimiter $$
