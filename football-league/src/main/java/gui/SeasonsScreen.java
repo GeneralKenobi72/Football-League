@@ -137,7 +137,7 @@ public class SeasonsScreen {
 			Stage primaryStage = new Stage();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Welcome");
+			primaryStage.setTitle(choosenSeason);
 			primaryStage.show();
 
 			// Main.GuiInstance = loader.getController();

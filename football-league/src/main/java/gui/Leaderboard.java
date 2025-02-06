@@ -168,7 +168,7 @@ public class Leaderboard {
 			Stage primaryStage = new Stage();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Football League");
+			primaryStage.setTitle(SeasonsScreen.choosenSeason);
 			primaryStage.show();
 
 			// Main.GuiInstance = loader.getController();

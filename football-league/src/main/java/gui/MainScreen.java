@@ -122,7 +122,7 @@ public class MainScreen {
 			Stage primaryStage = new Stage();
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Round");
+			primaryStage.setTitle(SeasonsScreen.choosenSeason + " Rounds");
 			primaryStage.show();
 
 			Stage currentStage = (Stage) BackButton.getScene().getWindow();
