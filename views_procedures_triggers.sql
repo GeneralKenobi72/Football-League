@@ -73,31 +73,26 @@ CREATE PROCEDURE add_full_match(
     IN p_away_club VARCHAR(45)
 )
 BEGIN
-    -- Greška handler
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        ROLLBACK; -- Poništi sve promene ako dođe do greške
+        ROLLBACK;
     END;
 
     START TRANSACTION;
 
-    -- Unesi u Match
     INSERT INTO `Match`(MatchID, DateTime, RoundNumber, SeasonYear)
     VALUES (p_matchid, p_date_time, p_round_number, p_season);
 
-    -- Unesi u MatchStats
     INSERT INTO MatchStats(MatchID, NumberOfGoalsHome, NumberOfGoalsGuests, NumberOfFans, NumberOfYellowCards, NumberOfRedCards, NumberOfCorners)
     VALUES (p_matchid, p_nogh, p_nogg, p_nof, p_noyc, p_norc, p_noc);
 
-    -- Unesi u Club_has_Match za Home tim
     INSERT INTO Club_has_Match(Club_ClubName, Match_MatchID, Role)
     VALUES (p_home_club, p_matchid, 'Home');
 
-    -- Unesi u Club_has_Match za Away tim
     INSERT INTO Club_has_Match(Club_ClubName, Match_MatchID, Role)
     VALUES (p_away_club, p_matchid, 'Away');
 
-    COMMIT; -- Potvrdi sve promene
+    COMMIT;
 END$$
 
 DELIMITER ;
@@ -152,10 +147,8 @@ CREATE TRIGGER before_match_delete
 BEFORE DELETE ON `Match`
 FOR EACH ROW
 BEGIN
-    -- Prvo brišemo sve zapise iz Club_has_Match koji su povezani s MatchID
     DELETE FROM Club_has_Match WHERE Match_MatchID = OLD.MatchID;
 
-    -- Zatim brišemo sve zapise iz MatchStats koji su povezani s MatchID
     DELETE FROM MatchStats WHERE MatchID = OLD.MatchID;
 END$$
 
@@ -169,7 +162,6 @@ CREATE TRIGGER before_round_delete
 BEFORE DELETE ON `Round`
 FOR EACH ROW
 BEGIN
-    -- Brišemo sve mečeve koji su povezani s obrisanom rundom
     DELETE FROM `Match` WHERE RoundNumber = OLD.RoundNumber AND SeasonYear = OLD.SeasonYear;
 END$$
 
@@ -183,7 +175,6 @@ CREATE TRIGGER before_season_delete
 BEFORE DELETE ON `Season`
 FOR EACH ROW
 BEGIN
-    -- Brišemo sve runde koje pripadaju obrisanoj sezoni
     DELETE FROM Round WHERE SeasonYear = OLD.Year;
 END$$
 

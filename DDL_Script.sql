@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Round` (
   CONSTRAINT `fk_Round_Season1`
     FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -105,13 +105,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Match` (
   CONSTRAINT `fk_Match_Round1`
     FOREIGN KEY (`RoundNumber`)
     REFERENCES `football-league`.`Round` (`RoundNumber`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Match_Season1`
     FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -144,18 +144,18 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Contract` (
   CONSTRAINT `fk_Contract_Club1`
     FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Contract_Season1`
     FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Contract_Player1`
     FOREIGN KEY (`PlayerJMBG`)
     REFERENCES `football-league`.`Player` (`JMBG`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -185,8 +185,8 @@ CREATE TABLE IF NOT EXISTS `football-league`.`MatchStats` (
   CONSTRAINT `fk_MatchStats_Match1`
     FOREIGN KEY (`MatchID`)
     REFERENCES `football-league`.`Match` (`MatchID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -208,13 +208,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`PlayerStatsInOneMatch` (
   CONSTRAINT `fk_PlayerStatsInOneMatch_Match1`
     FOREIGN KEY (`MatchID`)
     REFERENCES `football-league`.`Match` (`MatchID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_PlayerStatsInOneMatch_Player1`
     FOREIGN KEY (`PlayerJMBG`)
     REFERENCES `football-league`.`Player` (`JMBG`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -231,13 +231,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Club_has_Match` (
   CONSTRAINT `fk_Club_has_Match_Club1`
     FOREIGN KEY (`Club_ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Club_has_Match_Match1`
     FOREIGN KEY (`Match_MatchID`)
     REFERENCES `football-league`.`Match` (`MatchID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -258,13 +258,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Season_has_Club` (
   CONSTRAINT `fk_Season_has_Club_Season1`
     FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Season_has_Club_Club1`
     FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -289,13 +289,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`PlayerStatsInSeason` (
   CONSTRAINT `fk_PlayerStatsInSeason_Season1`
     FOREIGN KEY (`SeasonYear`)
     REFERENCES `football-league`.`Season` (`Year`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_PlayerStatsInSeason_Player1`
     FOREIGN KEY (`PlayerJMBG`)
     REFERENCES `football-league`.`Player` (`JMBG`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -313,13 +313,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Club_has_Coach` (
   CONSTRAINT `fk_Club_has_Coach_Club1`
     FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Club_has_Coach_Coach1`
     FOREIGN KEY (`CoachJMBG`)
     REFERENCES `football-league`.`Coach` (`JMBG`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -338,12 +338,12 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Club_has_President` (
     FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Club_has_President_President1`
     FOREIGN KEY (`PresidentJMBG`)
     REFERENCES `football-league`.`President` (`JMBG`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -360,13 +360,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Match_has_Referee` (
   CONSTRAINT `fk_Match_has_Referee_Match1`
     FOREIGN KEY (`MatchID`)
     REFERENCES `football-league`.`Match` (`MatchID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Match_has_Referee_Referee1`
     FOREIGN KEY (`RefereeJMBG`)
     REFERENCES `football-league`.`Referee` (`JMBG`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -382,13 +382,13 @@ CREATE TABLE IF NOT EXISTS `football-league`.`Stadium_has_Club` (
   CONSTRAINT `fk_Stadium_has_Club_Stadium1`
     FOREIGN KEY (`StadiumAdress`)
     REFERENCES `football-league`.`Stadium` (`StadiumAdress`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Stadium_has_Club_Club1`
     FOREIGN KEY (`ClubName`)
     REFERENCES `football-league`.`Club` (`ClubName`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
